@@ -8,16 +8,18 @@ const pool = new Pool({
   port: 5432
 })
 
-const getProduct = (req, res) => {
-  pool.query('SELECT * from products WHERE id = 1', (err, results) => {
-    if(err) {
-      throw err
-    }
-    console.log(results.rows)
-    return results
-  })
-}
+module.exports = pool;
 
-module.exports = {
-  getProduct: getProduct
-}
+// const getProduct = (req, res) => {
+//   pool.query('SELECT * from products WHERE id = 1', (err, results) => {
+//     if(err) {
+//       throw err
+//     }
+//     console.log(results.rows)
+//     return results
+//   })
+// }
+
+// module.exports = {
+//   getProduct: getProduct
+// }
