@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const productController = require('../models/products.js');
+const productController = require('../controllers/products.js');
 // const pool = require('../db.js');
 
 router.get('/', async (req, res) => {
