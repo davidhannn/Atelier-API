@@ -1,13 +1,12 @@
 const pool = require('../db.js');
 
 module.exports = {
-  getProduct: () => {
-    pool.query('SELECT * from products WHERE id = 2', (err, results) => {
-      if(err) {
+  getProduct: (req, res) => {
+      pool.query('SELECT * from products WHERE id = $1', [req.params.id], (err, results) => {
+      if (err) {
         throw err
       }
-      console.log(results.rows)
-      return results
+      res.send(results.rows[0]);
     })
   }
 }

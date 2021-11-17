@@ -9,17 +9,3 @@ const pool = new Pool({
 })
 
 module.exports = pool;
-
-// const getProduct = (req, res) => {
-//   pool.query('SELECT * from products WHERE id = 1', (err, results) => {
-//     if(err) {
-//       throw err
-//     }
-//     console.log(results.rows)
-//     return results
-//   })
-// }
-
-// module.exports = {
-//   getProduct: getProduct
-// }
