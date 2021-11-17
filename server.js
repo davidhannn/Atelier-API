@@ -6,13 +6,15 @@ const bodyParser = require('body-parser')
 const db = require('./db.js');
 const app = express();
 
+const productRoute = require('./routes/products')
+const cartRoute = require('./routes/cart')
 
 const PORT = 3000;
 
 app.use(bodyParser.json());
 
-app.use('/api/products', require('./routes/products'));
-
+app.use('/api/products', productRoute);
+app.use('/api/cart', cartRoute);
 
 app.listen(PORT, () => {
   console.log(`Currenty listening to PORT ${PORT}`)
