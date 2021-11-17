@@ -84,13 +84,15 @@ SELECT
   description,
   category,
   default_price,
-  ARRAY_AGG (feature || '' || value) features
+  json_agg(json_build_object('feature', feature, 'value', value)) features
 FROM
   products
-LEFT JOIN
+INNER JOIN
   features
 ON
   products.id = features.product_id
+AND
+  products.id = 1
 GROUP BY
   products.id
 ORDER BY
