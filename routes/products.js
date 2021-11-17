@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const productController = require('../controllers/products.js');
+const { getProduct, getProductStyles } = require('../controllers/products.js');
 // const pool = require('../db.js');
 
 // router.get('/:id', async (req, res) => {
@@ -10,6 +10,7 @@ const productController = require('../controllers/products.js');
 //   res.json(result);
 // })
 
-router.get('/:id', productController.getProduct);
+router.get('/:id', getProduct);
+router.get('/:id/styles', getProductStyles);
 
 module.exports = router;
