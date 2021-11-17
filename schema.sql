@@ -55,8 +55,7 @@ CREATE TABLE related (
   id serial PRIMARY KEY,
   current_product_id INT,
   related_product_id INT,
-  FOREIGN KEY (current_product_id) REFERENCES products(id),
-  FOREIGN KEY (related_product_id) REFERENCES products(id)
+  FOREIGN KEY (current_product_id) REFERENCES products(id)
 );
 
 COPY characters

@@ -22,7 +22,7 @@ module.exports = {
       if (err) {
         throw err
       }
-      console.log(results.rows)
+      res.send(results.rows);
     })
   }
 }
