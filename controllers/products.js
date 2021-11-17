@@ -16,5 +16,13 @@ module.exports = {
       }
       res.send(results.rows);
     })
+  },
+  getRelatedProducts: (req, res) => {
+    pool.query('SELECT * from related WHERE current_product_id = $1', [req.params.id], (err, results) => {
+      if (err) {
+        throw err
+      }
+      console.log(results.rows)
+    })
   }
 }
