@@ -58,7 +58,40 @@ CREATE TABLE related (
   FOREIGN KEY (current_product_id) REFERENCES products(id)
 );
 
+/* COPY from CSV and delimit
 COPY characters
 FROM 'C:\a\characters.csv'
 DELIMITER ','
 CSV HEADER;
+*/
+
+-- SELECT
+--   id AS product_id,
+--   name,
+--   slogan,
+--   description,
+--   category,
+--   default_price,
+--   ARRAY_AGG (features.feature, features.value) features
+-- FROM
+--   products
+-- LEFT JOIN features USING (product_id)
+
+SELECT
+  products.id,
+  name,
+  slogan,
+  description,
+  category,
+  default_price,
+  ARRAY_AGG (feature || '' || value) features
+FROM
+  products
+LEFT JOIN
+  features
+ON
+  products.id = features.product_id
+GROUP BY
+  products.id
+ORDER BY
+  products.id;
