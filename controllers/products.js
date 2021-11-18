@@ -29,6 +29,16 @@ getProductStyles: (req, res) => {
       const photoQuery = await pool.query('SELECT url, thumbnail_url FROM photos WHERE photos.styleId = $1', [style.style_id])
       const skusQuery = await pool.query('SELECT skus.id, skus.size, skus.quantity FROM skus WHERE skus.styleId = $1', [style.style_id])
 
+      if (style.sale_price == null) {
+        style.sale_price = "0"
+      }
+
+      if (style['default?'] === 1) {
+        style['default?'] = true
+      } else {
+        style['default'] = false
+      }
+
       style.photos = photoQuery.rows
       style.skus = {}
       const skuObj = skusQuery.rows.map(({ id, size, quantity}) => {
