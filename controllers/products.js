@@ -54,11 +54,14 @@ getProductStyles: (req, res) => {
   //   })
   // },
   getRelatedProducts: (req, res) => {
-    pool.query('SELECT * from related WHERE current_product_id = $1', [req.params.id], (err, results) => {
+    pool.query('SELECT related_product_id from related WHERE current_product_id = $1', [req.params.id], (err, results) => {
       if (err) {
         throw err
       }
-      res.send(results.rows);
+      const data = results.rows.map(({related_product_id}) => {
+        return related_product_id
+      })
+      res.send(data);
     })
   }
 }
