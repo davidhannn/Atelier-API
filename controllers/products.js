@@ -49,6 +49,7 @@ getProductStyles: (req, res) => {
       }
 
       style.photos = photoQuery.rows
+      console.log(style.photos)
       style.skus = {}
       const skuObj = skusQuery.rows.map(({ id, size, quantity}) => {
         return style.skus[id] = {
@@ -58,6 +59,7 @@ getProductStyles: (req, res) => {
       })
       return style;
     })
+
     Promise.all(productStyleObject).then((result) => {
       dataObject['results'] = [...result]
       res.send(dataObject)
