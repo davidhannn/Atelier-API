@@ -5,6 +5,15 @@ const productQuery = `SELECT products.id, name, slogan, description, category, d
 INNER JOIN features ON products.id = features.product_id AND products.id = $1 GROUP BY products.id ORDER BY products.id`
 
 module.exports = {
+  getProducts: (req, res) => {
+    pool.query('SELECT id, name, slogan, description, category, default_price FROM products WHERE id = 1', (err, results) => {
+      if (err) {
+        throw err
+      }
+      console.log(results.rows)
+      res.send([...results.rows])
+    })
+  },
   getProduct: (req, res) => {
     pool.query(productQuery, [req.params.id], (err, results) => {
     if (err) {

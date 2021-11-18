@@ -9,3 +9,6 @@
 -  Main server file will use route for different apis (e.g app.use('/api/products', ProductRoute))
   - Routes folder contains the specific route endpoints that run a controller function when endpoint is requested
     - Model folder contains the schemas for the entities
+
+## Connecting API with Server
+- change the api call in the server to call our API endpoint

@@ -9,12 +9,14 @@ const app = express();
 const productRoute = require('./routes/products')
 const cartRoute = require('./routes/cart')
 
-const PORT = 3000;
+const PORT = 3010;
 
+app.use(cors())
 app.use(bodyParser.json());
 
 app.use('/api/products', productRoute);
 app.use('/api/cart', cartRoute);
+
 
 app.listen(PORT, () => {
   console.log(`Currenty listening to PORT ${PORT}`)

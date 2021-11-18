@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { getProduct, getProductStyles, getRelatedProducts } = require('../controllers/products.js');
+const { getProduct, getProducts, getProductStyles, getRelatedProducts } = require('../controllers/products.js');
 // const pool = require('../db.js');
 
 // router.get('/:id', async (req, res) => {
@@ -10,6 +10,7 @@ const { getProduct, getProductStyles, getRelatedProducts } = require('../control
 //   res.json(result);
 // })
 
+router.get('/', getProducts);
 router.get('/:id', getProduct);
 router.get('/:id/styles', getProductStyles);
 router.get('/:id/related', getRelatedProducts);
