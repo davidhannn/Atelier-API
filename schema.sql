@@ -65,18 +65,7 @@ DELIMITER ','
 CSV HEADER;
 */
 
--- SELECT
---   id AS product_id,
---   name,
---   slogan,
---   description,
---   category,
---   default_price,
---   ARRAY_AGG (features.feature, features.value) features
--- FROM
---   products
--- LEFT JOIN features USING (product_id)
-
+/* For aggregating for product */
 SELECT
   products.id,
   name,
@@ -97,3 +86,145 @@ GROUP BY
   products.id
 ORDER BY
   products.id;
+
+/* For aggregating for product styles*/
+SELECT
+	productId,
+	json_build_object('results',
+						json_agg(json_build_object(
+							'style_id', id,
+							'name', name,
+							'original_price', original_price,
+							'sale_price', sale_price,
+							'default?', default_style
+						))
+					 ) productstyles
+FROM
+	productstyles
+WHERE
+	productId = 1
+GROUP BY
+	productId
+ORDER BY
+	productId
+
+  /* aggregating product styles with photos */
+  SELECT
+	productId,
+	json_build_object('results',
+						json_agg(json_build_object(
+							'style_id', id,
+							'name', name,
+							'original_price', original_price,
+							'sale_price', sale_price,
+							'default?', default_style,
+							'photos', (
+								SELECT json_agg(
+									json_build_object(
+										'thumbnail_url', thumbnail_url,
+										'url', url
+									)
+								)
+								FROM photos
+								WHERE photos.styleId = productstyles.id
+								GROUP BY productstyles.id
+							)
+						))
+					 ) productstyles
+FROM
+	productstyles
+WHERE
+	productId = 1
+GROUP BY
+	productId
+ORDER BY
+	productId
+
+  /* aggregating product styles with photos and skus*/
+  SELECT
+	productId,
+	json_build_object('results',
+						json_agg(json_build_object(
+							'style_id', id,
+							'name', name,
+							'original_price', original_price,
+							'sale_price', sale_price,
+							'default?', default_style,
+							'photos', (
+								SELECT json_agg(
+									json_build_object(
+										'thumbnail_url', thumbnail_url,
+										'url', url
+									)
+								)
+								FROM photos
+								WHERE photos.styleId = productstyles.id
+								GROUP BY productstyles.id
+							),
+							'skus', (
+								SELECT json_object_agg(skus.id, json_build_object(
+									'quantity', quantity,
+									'size', size
+								)
+								)
+								FROM skus
+								WHERE skus.styleId = productstyles.id
+								GROUP BY productstyles.id
+						  )
+						 )
+					   )
+					 ) productstyles
+FROM
+	productstyles
+WHERE
+	productId = $1
+GROUP BY
+	productId
+ORDER BY
+	productId
+
+  /* sending styles in correct format*/
+   SELECT
+	json_build_object(
+		'productId', productId,
+		'results', json_agg(json_build_object(
+							'style_id', id,
+							'name', name,
+							'original_price', original_price,
+							'sale_price', sale_price,
+							'default?', default_style,
+							'photos', (
+								SELECT json_agg(
+									json_build_object(
+										'thumbnail_url', thumbnail_url,
+										'url', url
+									)
+								)
+								FROM photos
+								WHERE photos.styleId = productstyles.id
+								GROUP BY productstyles.id
+							),
+							'skus', (
+								SELECT json_object_agg(skus.id, json_build_object(
+									'quantity', quantity,
+									'size', size
+								)
+								)
+								FROM skus
+								WHERE skus.styleId = productstyles.id
+								GROUP BY productstyles.id
+						  )
+						 )
+	)
+)
+FROM
+	productstyles
+WHERE
+	productId = $1
+GROUP BY
+	productId
+ORDER BY
+	productId
+
+/* Query Photos */
+SELECT * FROM photos WHERE photos.styleId = $1
