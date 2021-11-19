@@ -44,6 +44,19 @@ describe('Related Product ID', () => {
       }
     })
   })
+
+  it('respond back with no related Product IDs for product if there is a 0', () => {
+    mock.addInteraction({
+      request: {
+        method: 'GET',
+        path: '/api/products/120/related'
+      },
+      response: {
+        status: 200,
+        body: []
+      }
+    })
+  })
 })
 
 mock.start(3010);
