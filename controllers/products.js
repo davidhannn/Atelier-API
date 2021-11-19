@@ -11,7 +11,7 @@ module.exports = {
         throw err
       }
       console.log(results.rows)
-      res.send([...results.rows])
+      res.status(200).json([...results.rows])
     })
   },
   getProduct: (req, res) => {
@@ -48,8 +48,8 @@ getProductStyles: (req, res) => {
         style['default'] = false
       }
 
+
       style.photos = photoQuery.rows
-      console.log(style.photos)
       style.skus = {}
       const skuObj = skusQuery.rows.map(({ id, size, quantity}) => {
         return style.skus[id] = {
