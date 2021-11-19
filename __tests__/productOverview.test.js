@@ -1,4 +1,5 @@
 const { mock } = require('pactum')
+const { singleProductData } = require('./data/mockData.js')
 
 describe('Testing Mock Server', () => {
   it('should send back response', () => {
@@ -9,7 +10,7 @@ describe('Testing Mock Server', () => {
       },
       response: {
         status: 200,
-        body: 'Test'
+        body: singleProductData
       }
     })
   })
