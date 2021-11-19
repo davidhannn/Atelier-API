@@ -6,7 +6,7 @@ INNER JOIN features ON products.id = features.product_id AND products.id = $1 GR
 
 module.exports = {
   getProducts: (req, res) => {
-    pool.query('SELECT id, name, slogan, description, category, default_price FROM products WHERE id = 1', (err, results) => {
+    pool.query('SELECT id, name, slogan, description, category, default_price FROM products LIMIT 5', (err, results) => {
       if (err) {
         throw err
       }
@@ -80,7 +80,9 @@ getProductStyles: (req, res) => {
         throw err
       }
       const data = results.rows.map(({related_product_id}) => {
-        return related_product_id
+        if (related_product_id != 0) {
+          return related_product_id
+        }
       })
       res.send(data);
     })
