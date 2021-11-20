@@ -228,3 +228,9 @@ ORDER BY
 
 /* Query Photos */
 SELECT * FROM photos WHERE photos.styleId = $1
+
+ALTER TABLE productStyles
+  ALTER default_style DROP DEFAULT
+ ,ALTER default_style TYPE boolean USING (default_style::int::boolean)
+ ,ALTER default_style SET NOT NULL
+ ,ALTER default_style SET DEFAULT false;
