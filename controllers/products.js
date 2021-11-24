@@ -113,10 +113,19 @@ getProductStyles: (req, res) => {
     if (err) {
       throw err
     }
+    // console.log(results)
+    if (results.rows.length === 0) {
+      res.json({
+        product_id: req.params.id,
+        results: []
+      })
+    } else {
+
     res.json({
       product_id: results.rows[0].product_id,
       results: results.rows[0].json_build_object.results
     })
+  }
 })
 },
   getRelatedProducts: (req, res) => {
