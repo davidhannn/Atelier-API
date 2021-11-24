@@ -9,7 +9,8 @@
     "test": "jest --detectOpenHandles",
     "newRelic": "node -r newrelic server.js",
     "k6": "k6 run k6/load-test.js",
-    "k6-last": "k6 run k6/last-test.js"
+    "k6-last": "k6 run k6/last-test.js",
+    "k6-mid": "k6 run k6/mid-test.js"
   },
   "repository": {
     "type": "git",

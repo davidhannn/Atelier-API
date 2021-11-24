@@ -8,11 +8,11 @@ export let options = {
   scenarios: {
     contacts: {
       executor: 'constant-arrival-rate',
-      rate: 100, // how many requests
+      rate: 1000, // how many requests
       timeUnit: '1s', // per time unit
       duration: '20s', // total duration of scenario
       preAllocatedVUs: 1000,
-      maxVUs: 100,
+      maxVUs: 1000,
     },
   },
 };
@@ -24,6 +24,7 @@ export let options = {
 //   });
 // };
 
+// Randomized Single Product for last 10%
 export default function() {
   let randomInt = 900000 + Math.floor(Math.random() * 100000)
   let res = http.get(`${url}/api/products/${randomInt}`);
@@ -31,3 +32,21 @@ export default function() {
     "success": (r) => r.status == 200
   });
 };
+
+// Randomized Product Styles for last 10%
+// export default function() {
+//   let randomInt = 900000 + Math.floor(Math.random() * 100000)
+//   let res = http.get(`${url}/api/products/${randomInt}/styles`);
+//   check(res, {
+//     "success": (r) => r.status == 200
+//   });
+// };
+
+// Randomized Related Items for last 10%
+// export default function() {
+//   let randomInt = 900000 + Math.floor(Math.random() * 100000)
+//   let res = http.get(`${url}/api/products/${randomInt}/related`);
+//   check(res, {
+//     "success": (r) => r.status == 200
+//   });
+// };
