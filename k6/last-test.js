@@ -8,11 +8,11 @@ export let options = {
   scenarios: {
     contacts: {
       executor: 'constant-arrival-rate',
-      rate: 1000, // how many requests
+      rate: 100, // how many requests
       timeUnit: '1s', // per time unit
       duration: '20s', // total duration of scenario
       preAllocatedVUs: 1000,
-      maxVUs: 1000,
+      maxVUs: 100,
     },
   },
 };
@@ -24,9 +24,10 @@ export let options = {
 //   });
 // };
 
-// export default function() {
-//   let res = http.get(`${url}/api/products/1`);
-//   check(res, {
-//     "success": (r) => r.status == 200
-//   });
-// };
+export default function() {
+  let randomInt = 900000 + Math.floor(Math.random() * 100000)
+  let res = http.get(`${url}/api/products/${randomInt}`);
+  check(res, {
+    "success": (r) => r.status == 200
+  });
+};

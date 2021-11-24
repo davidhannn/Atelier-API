@@ -17,33 +17,42 @@ export let options = {
   },
 };
 
-
-// export default function () {
-//   let randi = Math.floor(Math.random() * 100000 + 900000);
-//   // let randi = Math.floor(Math.random() * 1000011);
-//   const url = `http://localhost:3001/reviews/meta/?product_id=${randi}`;
-//   // console.log(url);
-//   const res = http.get(url);
-//   // console.log(res.body);
-//   // sleep(1);
-// }
-
-// export default function() {
-//   let res = http.get(`${url}/api/products`);
-//   check(res, {
-//     "success": (r) => r.status == 200
-//   });
-// };
-
+// Randomized Get Product
 export default function() {
   let randomId = Math.floor(Math.random() * 1000000)
-  let res = http.get(`${url}/api/products/${randomId}/styles`);
+  let res = http.get(`${url}/api/products/${randomId}`);
   check(res, {
     "success": (r) => r.status == 200
   });
 };
 
+// Randomized Product Styles
+// export default function() {
+//   let randomId = Math.floor(Math.random() * 1000000)
+//   let res = http.get(`${url}/api/products/${randomId}/styles`);
+//   check(res, {
+//     "success": (r) => r.status == 200
+//   });
+// };
 
+// Randomized Related Products
+// export default function() {
+//   let randomId = Math.floor(Math.random() * 4000000)
+//   let res = http.get(`${url}/api/products/${randomId}/related`);
+//   check(res, {
+//     "success": (r) => r.status == 200
+//   });
+// };
+
+// Get Single Product
+// export default function() {
+//   let res = http.get(`${url}/api/products/1`);
+//   check(res, {
+//     "success": (r) => r.status == 200
+//   });
+// };
+
+// Product Styles
 // export default function() {
 //   let res = http.get(`${url}/api/products/1/styles`);
 //   check(res, {
@@ -51,9 +60,17 @@ export default function() {
 //   });
 // };
 
+// Related Products
 // export default function() {
-//   let randomId = Math.floor(Math.random() * 4000000)
-//   let res = http.get(`${url}/api/products/${randomId}/related`);
+//   let res = http.get(`${url}/api/products/1/related`);
+//   check(res, {
+//     "success": (r) => r.status == 200
+//   });
+// };
+
+// Get Products
+// export default function() {
+//   let res = http.get(`${url}/api/products`);
 //   check(res, {
 //     "success": (r) => r.status == 200
 //   });
