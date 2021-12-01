@@ -1,7 +1,8 @@
 const http = require('k6/http');
 const { check } = require('k6');
 
-const url = 'http://localhost:3010'
+// const url = 'http://localhost:3010'
+const url = 'http://18.189.16.11'
 
 export let options = {
   discardResponseBodies: true,

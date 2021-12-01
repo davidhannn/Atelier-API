@@ -52,7 +52,8 @@ module.exports = {
   getProducts: (req, res) => {
     pool.query('SELECT id, name, slogan, description, category, default_price FROM products LIMIT 5', (err, results) => {
       if (err) {
-        throw err
+        res.status(500)
+        // throw err
       }
       console.log(results.rows)
       res.status(200).json([...results.rows])
@@ -61,7 +62,7 @@ module.exports = {
   getProduct: (req, res) => {
     pool.query(productQuery, [req.params.id], (err, results) => {
     if (err) {
-      throw err
+      res.status(500)
     }
     res.send(results.rows[0]);
   })
@@ -111,7 +112,7 @@ module.exports = {
 getProductStyles: (req, res) => {
    pool.query(productStylesQuery, [req.params.id], async (err, results) => {
     if (err) {
-      throw err
+      res.status(500)
     }
     // console.log(results)
     if (results.rows.length === 0) {
@@ -131,7 +132,7 @@ getProductStyles: (req, res) => {
   getRelatedProducts: (req, res) => {
     pool.query('SELECT related_product_id from related WHERE current_product_id = $1', [req.params.id], (err, results) => {
       if (err) {
-        throw err
+        res.status(500)
       }
       const data = results.rows.map(({related_product_id}) => {
         if (related_product_id != 0) {
