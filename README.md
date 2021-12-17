@@ -26,6 +26,13 @@
 - Utilized caching within load balancer to reduce query times on endpoints to under 20ms on deployed service
 - Reduced intial query speeds of 6,000ms and error rate of 32% to under 600ms and 1% error rate on deployed service
 
+## Deployment
+- Deployed service on AWS EC2 container using the Ubuntu 20.04 server T2.micro
+- Installed node, npm and all node modules relevant to run a build of our project
+- Updated in bound rules to reroute all traffic from Port 80 to Port 3010 as our server hosts our client on Port 3010
+- Updated in bound rules to open traffic to Port 5432 for Postgres DB
+- Updated retail portal to send requests to our load balancer NGINX to distribute traffic to multiple instances
+
 ## Planning
 -  Initialize and create a node express server
 -  Connect PostgreSQL database with server
