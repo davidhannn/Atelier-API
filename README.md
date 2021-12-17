@@ -15,8 +15,10 @@
 
 ## Accomplishment
 - Utilized pgAdmin4 to extract, transfer and load CSV files containing up to 5 million rows into local database
+- Created a mock server using Pactum to test if correct data was being sent back when endpoint was reached
 - Reduced query speeds on local machine to under 5ms for each endpoint using indexing and querying data in postgres with aggregate functions
 - Used K6 in conjunction with New Relic to monitor system performance and deduce bottelnecks
+- Tested for the first 10%, middle and last 10% of rows when testing with K6 to account for any edge cases or slowdowns
 - API was deployed onto 5 AWS EC2 Instance (T2.micro) to horizontally scale application
 - Postgres Database was also deployed onto AWS EC2 Instance using pgDump to seed our database 
 - NGINX proxy server was deployed to route client traffic across multiple instances 
@@ -32,8 +34,10 @@
   - Routes folder contains the specific route endpoints that run a controller function when endpoint is requested
     - Model folder contains the schemas for the entities
 
-## Connecting API with Server
-- change the api call in the server to call our API endpoint
+## Potential Optimizations
+- Use Docker to deploy our application onto any machine
+- User Docker to create a container using a Postgres image and use Docker volumes to persist our database
+- Create an instance of the Docker container running Postgres image with seeded database
 
 ## Installation 
 
