@@ -10,6 +10,20 @@
 ## Overview
 - Create an API that serves product information to a retail portal. The API will serve up to 5 million rows of data in regards to product information, details, styles, photos and skus
 
+## Mission
+- The ultimate goal for this service was to have the deployed application handle up to a 1000 client requests per second while keeping an error rate under 1% and query speeds under 2000ms
+
+## Accomplishment
+- Utilized pgAdmin4 to extract, transfer and load CSV files containing up to 5 million rows into local database
+- Reduced query speeds on local machine to under 5ms for each endpoint using indexing and querying data in postgres with aggregate functions
+- Used K6 in conjunction with New Relic to monitor system performance and deduce bottelnecks
+- API was deployed onto 5 AWS EC2 Instance (T2.micro) to horizontally scale application
+- Postgres Database was also deployed onto AWS EC2 Instance using pgDump to seed our database 
+- NGINX proxy server was deployed to route client traffic across multiple instances 
+- Loader.IO was implemented to stress test deployed application
+- Utilized caching within load balancer to reduce query times on endpoints to under 20ms on deployed service
+- Reduced intial query speeds of 6,000ms and error rate of 32% to under 600ms and 1% error rate on deployed service
+
 ## Planning
 -  Initialize and create a node express server
 -  Connect PostgreSQL database with server
